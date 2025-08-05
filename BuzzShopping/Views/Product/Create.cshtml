@@ -4,97 +4,142 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div class="max-w-4xl mx-auto p-6">
+    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-slate-100">
+        <div class="bg-slate-700 p-4 text-white">
+            <h1 class="text-2xl font-bold">Create Product</h1>
+        </div>
 
-<h4>ProductDto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Code" class="control-label"></label>
-                <input asp-for="Code" class="form-control" />
-                <span asp-validation-for="Code" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Model" class="control-label"></label>
-                <input asp-for="Model" class="form-control" />
-                <span asp-validation-for="Model" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SpecialOfferPrice" class="control-label"></label>
-                <input asp-for="SpecialOfferPrice" class="form-control" />
-                <span asp-validation-for="SpecialOfferPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DiscountPercentage" class="control-label"></label>
-                <input asp-for="DiscountPercentage" class="form-control" />
-                <span asp-validation-for="DiscountPercentage" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="HasSpecialOffer" /> @Html.DisplayNameFor(model => model.HasSpecialOffer)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageFile" class="control-label"></label>
-                <input asp-for="ImageFile" type="file" class="form-control" />
-                <span asp-validation-for="ImageFile" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProductUrl" class="control-label"></label>
-                <input asp-for="ProductUrl" class="form-control" />
-                <span asp-validation-for="ProductUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Stock" class="control-label"></label>
-                <input asp-for="Stock" class="form-control" />
-                <span asp-validation-for="Stock" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsFeatured" /> @Html.DisplayNameFor(model => model.IsFeatured)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Brand" class="control-label"></label>
-                <input asp-for="Brand" class="form-control" />
-                <span asp-validation-for="Brand" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        <div class="p-6">
+            <form asp-action="Create" enctype="multipart/form-data" class="space-y-6">
+                <div asp-validation-summary="ModelOnly" class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+                    <div class="text-red-700">Please correct the following errors:</div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Column 1 -->
+                    <div class="space-y-4">
+                        <!-- Code -->
+                        <div>
+                            <label asp-for="Code" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                            <input asp-for="Code" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                            <span asp-validation-for="Code" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Name -->
+                        <div>
+                            <label asp-for="Name" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                            <input asp-for="Name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                            <span asp-validation-for="Name" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Model -->
+                        <div>
+                            <label asp-for="Model" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                            <input asp-for="Model" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                            <span asp-validation-for="Model" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Brand -->
+                        <div>
+                            <label asp-for="Brand" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                            <input asp-for="Brand" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                            <span asp-validation-for="Brand" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Description -->
+                        <div>
+                            <label asp-for="Description" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                            <input asp-for="Description" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                            <span asp-validation-for="Description" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="space-y-4">
+                        <!-- Price -->
+                        <div>
+                            <label asp-for="Price" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                            <input asp-for="Price" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                            <span asp-validation-for="Price" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Special Offer Price -->
+                        <div>
+                            <label asp-for="SpecialOfferPrice" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                            <input asp-for="SpecialOfferPrice" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                            <span asp-validation-for="SpecialOfferPrice" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Discount Percentage -->
+                        <div>
+                            <label asp-for="DiscountPercentage" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                            <input asp-for="DiscountPercentage" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                            <span asp-validation-for="DiscountPercentage" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Product URL -->
+                        <div>
+                            <label asp-for="ProductUrl" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                            <input asp-for="ProductUrl" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                            <span asp-validation-for="ProductUrl" class="mt-1 text-sm text-red-600"></span>
+                        </div>
+
+                        <!-- Category -->
+                        <div>
+                            <label asp-for="CategoryId" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                            <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Full width fields -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Stock -->
+                    <div>
+                        <label asp-for="Stock" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                        <input asp-for="Stock" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                        <span asp-validation-for="Stock" class="mt-1 text-sm text-red-600"></span>
+                    </div>
+
+                    <!-- Image File -->
+                    <div class="md:col-span-2">
+                        <label asp-for="ImageFile" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                        <input asp-for="ImageFile" type="file" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                        <span asp-validation-for="ImageFile" class="mt-1 text-sm text-red-600"></span>
+                    </div>
+                </div>
+
+                <!-- Checkboxes -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                    <div class="flex items-center">
+                        <input asp-for="HasSpecialOffer" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
+                        <label asp-for="HasSpecialOffer" class="ml-2 block text-sm text-gray-700"></label>
+                    </div>
+
+                    <div class="flex items-center">
+                        <input asp-for="Active" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
+                        <label asp-for="Active" class="ml-2 block text-sm text-gray-700"></label>
+                    </div>
+
+                    <div class="flex items-center">
+                        <input asp-for="IsFeatured" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
+                        <label asp-for="IsFeatured" class="ml-2 block text-sm text-gray-700"></label>
+                    </div>
+                </div>
+
+                <!-- Form actions -->
+                <div class="flex justify-between items-center pt-6 border-t border-gray-200">
+                    <a asp-action="Index" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Back to List
+                    </a>
+                    <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-slate-700 hover:bg-slate-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Create Product
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

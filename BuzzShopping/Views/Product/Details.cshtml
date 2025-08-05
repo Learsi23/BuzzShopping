@@ -1,120 +1,145 @@
 ﻿@model Business.Entities.ProductEntity
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Product Details";
 }
 
-<h1>Details</h1>
+<div class="max-w-4xl mx-auto p-6">
+    <div class="bg-white rounded-lg shadow-md overflow-hidden border border-slate-100">
+        <div class="bg-slate-700 p-4 text-white">
+            <h1 class="text-xl font-semibold">Product Details</h1>
+            <p class="text-slate-200 text-sm">View complete product information</p>
+        </div>
 
-<div>
-    <h4>ProductEntity</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Code)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Code)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Model)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Model)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SpecialOfferPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SpecialOfferPrice)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiscountPercentage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiscountPercentage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HasSpecialOffer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HasSpecialOffer)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductUrl)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Stock)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Stock)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Active)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Active)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsFeatured)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsFeatured)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Brand)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Brand)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastUpdatedDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastUpdatedDate)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.ProductId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Column 1 -->
+                <div class="space-y-4">
+                    <div class="border-b border-slate-100 pb-4">
+                        <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.Code)</dt>
+                        <dd class="mt-1 text-sm text-slate-900">@Html.DisplayFor(model => model.Code)</dd>
+                    </div>
+
+                    <div class="border-b border-slate-100 pb-4">
+                        <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.Name)</dt>
+                        <dd class="mt-1 text-sm text-slate-900">@Html.DisplayFor(model => model.Name)</dd>
+                    </div>
+
+                    <div class="border-b border-slate-100 pb-4">
+                        <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.Model)</dt>
+                        <dd class="mt-1 text-sm text-slate-900">@Html.DisplayFor(model => model.Model)</dd>
+                    </div>
+
+                    <div class="border-b border-slate-100 pb-4">
+                        <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.Brand)</dt>
+                        <dd class="mt-1 text-sm text-slate-900">@Html.DisplayFor(model => model.Brand)</dd>
+                    </div>
+
+                    <div class="border-b border-slate-100 pb-4">
+                        <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.Description)</dt>
+                        <dd class="mt-1 text-sm text-slate-900">@Html.DisplayFor(model => model.Description)</dd>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="space-y-4">
+                    <div class="border-b border-slate-100 pb-4">
+                        <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.Price)</dt>
+                        <dd class="mt-1 text-sm text-slate-900">@Html.DisplayFor(model => model.Price)</dd>
+                    </div>
+
+                    <div class="border-b border-slate-100 pb-4">
+                        <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.SpecialOfferPrice)</dt>
+                        <dd class="mt-1 text-sm text-slate-900">@Html.DisplayFor(model => model.SpecialOfferPrice)</dd>
+                    </div>
+
+                    <div class="border-b border-slate-100 pb-4">
+                        <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.DiscountPercentage)</dt>
+                        <dd class="mt-1 text-sm text-slate-900">@Html.DisplayFor(model => model.DiscountPercentage)%</dd>
+                    </div>
+
+                    <div class="border-b border-slate-100 pb-4">
+                        <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.HasSpecialOffer)</dt>
+                        <dd class="mt-1 text-sm text-slate-900">
+                            @if (Model.HasSpecialOffer)
+                            {
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">No</span>
+                            }
+                        </dd>
+                    </div>
+
+                    <div class="border-b border-slate-100 pb-4">
+                        <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.Stock)</dt>
+                        <dd class="mt-1 text-sm text-slate-900">
+                            <span class="@(Model.Stock > 0 ? "text-green-600" : "text-red-600") font-medium">@Html.DisplayFor(model => model.Stock)</span>
+                        </dd>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full width fields -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.Image)</dt>
+                    <dd class="mt-1 text-sm text-slate-900">@Html.DisplayFor(model => model.Image)</dd>
+                </div>
+
+                <div class="border-b border-slate-100 pb-4">
+                    <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.ProductUrl)</dt>
+                    <dd class="mt-1 text-sm text-slate-900">
+                        <a href="@Model.ProductUrl" target="_blank" class="text-blue-600 hover:text-blue-800">View Product</a>
+                    </dd>
+                </div>
+
+                <div class="border-b border-slate-100 pb-4">
+                    <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.Category)</dt>
+                    <dd class="mt-1 text-sm text-slate-900">@Html.DisplayFor(model => model.Category.Description)</dd>
+                </div>
+
+                <div class="border-b border-slate-100 pb-4">
+                    <dt class="text-sm font-medium text-slate-500">Status</dt>
+                    <dd class="mt-1 text-sm text-slate-900">
+                        <div class="flex space-x-2">
+                            @if (Model.Active)
+                            {
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                            }
+                            else
+                            {
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Inactive</span>
+                            }
+
+                            @if (Model.IsFeatured)
+                            {
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Featured</span>
+                            }
+                        </div>
+                    </dd>
+                </div>
+
+                <div class="border-b border-slate-100 pb-4">
+                    <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.CreatedDate)</dt>
+                    <dd class="mt-1 text-sm text-slate-900">@Html.DisplayFor(model => model.CreatedDate)</dd>
+                </div>
+
+                <div class="border-b border-slate-100 pb-4">
+                    <dt class="text-sm font-medium text-slate-500">@Html.DisplayNameFor(model => model.LastUpdatedDate)</dt>
+                    <dd class="mt-1 text-sm text-slate-900">@Html.DisplayFor(model => model.LastUpdatedDate)</dd>
+                </div>
+            </div>
+
+            <div class="flex justify-between pt-6 border-t border-slate-200">
+                <a asp-action="Index" class="inline-flex items-center px-4 py-2 border border-slate-300 shadow-sm text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">
+                    Back to List
+                </a>
+                <a asp-action="Edit" asp-route-id="@Model.ProductId" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-slate-700 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">
+                    Edit Product
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
