@@ -1,39 +1,42 @@
 ﻿@model Business.Entities.RoleEntity
-
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-slate-700">Edit</h1>
+    <h4 class="text-xl font-semibold text-slate-700">RoleEntity</h4>
+    <hr class="my-4 border-slate-300" />
 
-<h4>RoleEntity</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="RoleId" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="flex justify-center">
+        <div class="w-full max-w-md">
+            <form asp-action="Edit" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <div asp-validation-summary="ModelOnly" class="text-red-500"></div>
+                <input type="hidden" asp-for="RoleId" />
+                <div class="mb-4">
+                    <label asp-for="Name" class="block text-slate-700 text-sm font-bold mb-2"></label>
+                    <input asp-for="Name" class="shadow appearance-none border rounded w-full py-2 px-3 text-slate-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    <span asp-validation-for="Name" class="text-red-500 text-xs italic"></span>
+                </div>
+                <div class="mb-6">
+                    <label asp-for="Description" class="block text-slate-700 text-sm font-bold mb-2"></label>
+                    <input asp-for="Description" class="shadow appearance-none border rounded w-full py-2 px-3 text-slate-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    <span asp-validation-for="Description" class="text-red-500 text-xs italic"></span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <input type="submit" value="Save" class="bg-slate-700 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Index" class="text-slate-700 hover:text-slate-900">Back to List</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
