@@ -14,7 +14,7 @@ namespace Business.Entities
         public string StreetAddress { get; set; } = null!;
 
         [StringLength(100, ErrorMessage = "The Street Address Line 2 must be at most 100 characters long.")]
-        public string? StreetAddressLine2 { get; set; } // Campo opcional para un segundo renglón
+        public string? StreetAddressLine2 { get; set; } 
 
         [Required(ErrorMessage = "The City field is required.")]
         [StringLength(50, ErrorMessage = "The City must be at most 50 characters long.")]
@@ -32,10 +32,8 @@ namespace Business.Entities
         [StringLength(50, ErrorMessage = "The Country must be at most 50 characters long.")]
         public string Country { get; set; } = null!;
 
-        // Campo para identificar si es la dirección principal
         public bool IsPrimary { get; set; }
 
-        // Relación con el usuario
         [Required]
         public int UserId { get; set; }
 

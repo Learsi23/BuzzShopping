@@ -34,6 +34,8 @@ namespace BuzzShopping.Controllers
                 .Include(o => o.BillingAddress)
                 .Include(o => o.ShippingAddress)
                 .Include(o => o.User)
+                .Include(o => o.OrderDetails)
+                   .ThenInclude(od => od.Product)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
             if (orderEntity == null)
             {
