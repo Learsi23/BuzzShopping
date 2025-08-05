@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36327.8 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuzzShopping", "BuzzShopping\BuzzShopping.csproj", "{06F7D2AE-A0E4-4049-8636-B47761D8A852}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{1F8C77F9-436E-471D-9EAC-44696CF89B4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06F7D2AE-A0E4-4049-8636-B47761D8A852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06F7D2AE-A0E4-4049-8636-B47761D8A852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06F7D2AE-A0E4-4049-8636-B47761D8A852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06F7D2AE-A0E4-4049-8636-B47761D8A852}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F8C77F9-436E-471D-9EAC-44696CF89B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F8C77F9-436E-471D-9EAC-44696CF89B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F8C77F9-436E-471D-9EAC-44696CF89B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F8C77F9-436E-471D-9EAC-44696CF89B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0265F24C-04A0-4B83-84F9-A2BCFDD51062}
+	EndGlobalSection
+EndGlobal
