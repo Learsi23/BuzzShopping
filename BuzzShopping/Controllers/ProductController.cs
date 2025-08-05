@@ -119,7 +119,7 @@ namespace BuzzShopping.Controllers
         }
 
         // GET: Product/Edit/5
-        // ... (el resto del código de Edit, Delete, etc. no ha sido modificado)
+        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
