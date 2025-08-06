@@ -10,14 +10,12 @@ using BuzzShopping.Data;
 
 namespace BuzzShopping.Controllers
 {
-    public class RoleController : Controller
+    public class RoleController : BaseController
     {
-        private readonly AppDbContext _context;
+       
 
-        public RoleController(AppDbContext context)
-        {
-            _context = context;
-        }
+        public RoleController(AppDbContext context) : base(context) { }
+      
 
         // GET: Role
         public async Task<IActionResult> Index()

@@ -10,14 +10,8 @@ using BuzzShopping.Data;
 
 namespace BuzzShopping.Controllers
 {
-    public class AddressController : Controller
+    public class AddressController(AppDbContext context) : BaseController(context)
     {
-        private readonly AppDbContext _context;
-
-        public AddressController(AppDbContext context)
-        {
-            _context = context;
-        }
 
         // GET: Address
         public async Task<IActionResult> Index()

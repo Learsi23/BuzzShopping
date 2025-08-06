@@ -1,0 +1,110 @@
+
+/* Contenedor principal del buscador */
+.search-container {
+    width: 100%;
+    max-width: 28rem; /* Ancho máximo similar al de Tailwind */
+    margin: 0 auto; /* Centrado horizontal */
+    padding: 0 1rem; /* Espaciado lateral */
+}
+
+/* Formulario de búsqueda */
+.search-form {
+    width: 100%;
+}
+
+/* Contenedor del input e ícono */
+.search-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Campo de búsqueda */
+.search-input {
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 2.5rem; /* Espacio para el ícono */
+    border: 1px solid #d1d5db; /* color gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    font-size: 0.875rem; /* text-sm */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+    transition: all 0.2s ease;
+}
+
+    .search-input:focus {
+        outline: none;
+        border-color: #64748b; /* slate-500 */
+        box-shadow: 0 0 0 2px rgba(100, 116, 139, 0.5); /* focus ring */
+    }
+
+/* Ícono de búsqueda */
+.search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af; /* gray-400 */
+    pointer-events: none; /* No interferir con clicks en el input */
+}
+
+    .search-icon svg {
+        width: 1.25rem; /* h-5 */
+        height: 1.25rem; /* w-5 */
+        stroke-width: 2;
+    }
+
+/* Responsive styles */
+@media (max-width: 767px) {
+    .search-container,
+    .icons-container {
+        display: none !important;
+    }
+
+    .hamburger-container {
+        display: flex !important;
+        align-items: center;
+    }
+
+    .mobile-menu {
+        position: absolute;
+        left: 0;
+        right: 0;
+        background-color: white;
+        border-top: 1px solid #E5E7EB;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+}
+
+@media (min-width: 768px) {
+    .search-container {
+        display: block !important;
+        flex: 1;
+        padding: 0 1rem;
+    }
+
+    .icons-container {
+        display: flex !important;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .hamburger-container {
+        display: none !important;
+    }
+
+    .mobile-menu {
+        display: none !important;
+    }
+}
+
+/* Mobile menu states */
+.mobile-menu.is-open {
+    display: block !important;
+}
+
+.hamburger-icon.hidden,
+.close-icon:not(.hidden) {
+    display: none !important;
+}
+
+.close-icon.hidden {
+    display: none !important;
+}

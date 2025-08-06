@@ -1,48 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Business.Entities;
 using BuzzShopping.Data;
+using Business.DTOs;
 
 namespace BuzzShopping.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
-        private readonly AppDbContext _context;
+        
 
-        public UserController(AppDbContext context)
-        {
-            _context = context;
-        }
+        public UserController(AppDbContext context) : base(context) { }
+       
 
         // GET: User
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Users.Include(u => u.Role);
-            return View(await appDbContext.ToListAsync());
+            try
+            {
+                var appDbContext = _context.Users.Include(u => u.Role);
+                return View(await appDbContext.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Error al cargar usuarios: {ex.Message}");
+                return View("Error");
+            }
         }
 
         // GET: User/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
-            var userEntity = await _context.Users
-                .Include(u => u.Role)
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (userEntity == null)
+            try
             {
-                return NotFound();
-            }
+                var userEntity = await _context.Users
+                    .Include(u => u.Role)
+                    .FirstOrDefaultAsync(m => m.UserId == id);
 
-            return View(userEntity);
+                if (userEntity == null)
+                    return NotFound();
+
+                return View(userEntity);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Error al obtener detalles del usuario: {ex.Message}");
+                return View("Error");
+            }
         }
 
         // GET: User/Create
@@ -53,92 +61,184 @@ namespace BuzzShopping.Controllers
         }
 
         // POST: User/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,Name,Email,PhoneNumber,Password,IsActive,CreatedDate,LastLoginDate,RoleId")] UserEntity userEntity)
+        public async Task<IActionResult> Create(UserRegisterDto dto)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(userEntity);
+                ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "Name", dto.RoleId);
+                return View(dto);
+            }
+
+            try
+            {
+                var user = new UserEntity
+                {
+                    Name = $"{dto.FirstName} {dto.LastName}".Trim(),
+                    Email = dto.Email,
+                    PhoneNumber = dto.PhoneNumber!,
+                    Password = dto.Password,
+                    RoleId = dto.RoleId,
+                    IsActive = true,
+                    CreatedDate = DateTime.UtcNow,
+                    LastLoginDate = null,
+                    Addresses = dto.Addresses.Select(a => new AddressEntity
+                    {
+                        StreetAddress = a.StreetAddress,
+                        StreetAddressLine2 = a.StreetAddressLine2,
+                        City = a.City,
+                        PostalCode = a.PostalCode,
+                        Region = a.Region,
+                        Country = a.Country,
+                        IsPrimary = a.IsPrimary
+                    }).ToList()
+                };
+
+                _context.Users.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "Name", userEntity.RoleId);
-            return View(userEntity);
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al crear el usuario.");
+                Console.Error.WriteLine($"Error en Create: {ex.Message}");
+                ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "Name", dto.RoleId);
+                return View(dto);
+            }
         }
 
         // GET: User/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
-            var userEntity = await _context.Users.FindAsync(id);
-            if (userEntity == null)
+            try
             {
-                return NotFound();
+                var userEntity = await _context.Users
+                    .Include(u => u.Addresses)
+                    .FirstOrDefaultAsync(u => u.UserId == id);
+
+                if (userEntity == null)
+                    return NotFound();
+
+                var dto = new UserUpdateDto
+                {
+                    UserId = userEntity.UserId,
+                    FirstName = userEntity.Name.Split(' ').FirstOrDefault() ?? "",
+                    LastName = string.Join(' ', userEntity.Name.Split(' ').Skip(1)),
+                    Email = userEntity.Email,
+                    PhoneNumber = userEntity.PhoneNumber,
+                    RoleId = userEntity.RoleId,
+                    Addresses = userEntity.Addresses.Select(a => new AddressDto
+                    {
+                        StreetAddress = a.StreetAddress,
+                        StreetAddressLine2 = a.StreetAddressLine2,
+                        City = a.City,
+                        PostalCode = a.PostalCode,
+                        Region = a.Region,
+                        Country = a.Country,
+                        IsPrimary = a.IsPrimary
+                    }).ToList()
+                };
+
+                ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "Name", dto.RoleId);
+                return View(dto);
             }
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "Name", userEntity.RoleId);
-            return View(userEntity);
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Error en Edit GET: {ex.Message}");
+                return View("Error");
+            }
         }
 
         // POST: User/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,Name,Email,PhoneNumber,Password,IsActive,CreatedDate,LastLoginDate,RoleId")] UserEntity userEntity)
+        public async Task<IActionResult> Edit(UserUpdateDto dto)
         {
-            if (id != userEntity.UserId)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "Name", dto.RoleId);
+                return View(dto);
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
+                var userEntity = await _context.Users
+                    .Include(u => u.Addresses)
+                    .FirstOrDefaultAsync(u => u.UserId == dto.UserId);
+
+                if (userEntity == null)
+                    return NotFound();
+
+                userEntity.Name = $"{dto.FirstName} {dto.LastName}".Trim();
+                userEntity.Email = dto.Email;
+                userEntity.PhoneNumber = dto.PhoneNumber ?? userEntity.PhoneNumber;
+                userEntity.RoleId = dto.RoleId;
+
+                if (!string.IsNullOrWhiteSpace(dto.Password))
                 {
-                    _context.Update(userEntity);
-                    await _context.SaveChangesAsync();
+                    userEntity.Password = dto.Password;
                 }
-                catch (DbUpdateConcurrencyException)
+
+                userEntity.Addresses = dto.Addresses.Select(a => new AddressEntity
                 {
-                    if (!UserEntityExists(userEntity.UserId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                    StreetAddress = a.StreetAddress,
+                    StreetAddressLine2 = a.StreetAddressLine2,
+                    City = a.City,
+                    PostalCode = a.PostalCode,
+                    Region = a.Region,
+                    Country = a.Country,
+                    IsPrimary = a.IsPrimary,
+                    UserId = userEntity.UserId
+                }).ToList();
+
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "Name", userEntity.RoleId);
-            return View(userEntity);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserEntityExists(dto.UserId))
+                {
+                    return NotFound();
+                }
+
+                throw;
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al actualizar el usuario.");
+                Console.Error.WriteLine($"Error en Edit POST: {ex.Message}");
+                ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "Name", dto.RoleId);
+                return View(dto);
+            }
         }
 
         // GET: User/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
-            var userEntity = await _context.Users
-                .Include(u => u.Role)
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (userEntity == null)
+            try
             {
-                return NotFound();
-            }
+                var userEntity = await _context.Users
+                    .Include(u => u.Role)
+                    .FirstOrDefaultAsync(m => m.UserId == id);
 
-            return View(userEntity);
+                if (userEntity == null)
+                    return NotFound();
+
+                return View(userEntity);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Error al cargar usuario para eliminar: {ex.Message}");
+                return View("Error");
+            }
         }
 
         // POST: User/Delete/5
@@ -146,14 +246,22 @@ namespace BuzzShopping.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var userEntity = await _context.Users.FindAsync(id);
-            if (userEntity != null)
+            try
             {
-                _context.Users.Remove(userEntity);
-            }
+                var userEntity = await _context.Users.FindAsync(id);
+                if (userEntity != null)
+                {
+                    _context.Users.Remove(userEntity);
+                    await _context.SaveChangesAsync();
+                }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Error al eliminar usuario con ID {id}: {ex.Message}");
+                return View("Error");
+            }
         }
 
         private bool UserEntityExists(int id)
