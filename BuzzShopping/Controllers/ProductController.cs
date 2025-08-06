@@ -8,16 +8,9 @@ using System.IO;
 
 namespace BuzzShopping.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController(AppDbContext context, IWebHostEnvironment webHostEnvironment) : BaseController(context)
     {
-        private readonly AppDbContext _context;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-
-        public ProductController(AppDbContext context, IWebHostEnvironment webHostEnvironment)
-        {
-            _context = context;
-            _webHostEnvironment = webHostEnvironment;
-        }
+        private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
 
         // GET: Product
         public async Task<IActionResult> Index()

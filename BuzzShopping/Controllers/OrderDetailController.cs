@@ -6,14 +6,8 @@ using BuzzShopping.Data;
 
 namespace BuzzShopping.Controllers
 {
-    public class OrderDetailController : Controller
+    public class OrderDetailController(AppDbContext context) : BaseController(context)
     {
-        private readonly AppDbContext _context;
-
-        public OrderDetailController(AppDbContext context)
-        {
-            _context = context;
-        }
 
         // GET: OrderDetail
         public async Task<IActionResult> Index()

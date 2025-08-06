@@ -10,14 +10,8 @@ using BuzzShopping.Data;
 
 namespace BuzzShopping.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController(AppDbContext context) : BaseController(context)
     {
-        private readonly AppDbContext _context;
-
-        public CategoryController(AppDbContext context)
-        {
-            _context = context;
-        }
 
         // GET: Category
         public async Task<IActionResult> Index()

@@ -33,12 +33,11 @@ namespace Business.Entities
         [StringLength(255, ErrorMessage = "The Password must be at most 255 characters long.")]
         public string Password { get; set; } = null!;
 
-        // Campos de administración y auditoría
         public bool IsActive { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? LastLoginDate { get; set; }
 
-        // Relación con el rol
+      
         [Required(ErrorMessage = "The Role field is required.")]
         public int RoleId { get; set; }
 
