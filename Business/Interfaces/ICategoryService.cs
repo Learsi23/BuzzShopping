@@ -6,7 +6,7 @@ namespace Business.Interfaces
     public interface ICategoryService
     {
 
-        Task<List<CategoryEntity>> GetCategoriesAsync();
+        Task<List<CategoryDto>> GetCategoriesAsync();
         Task<CategoryDto> GetCategoryByIdAsync(int id);
         Task CreateCategoryAsync(CategoryDto dto);
         Task UpdateCategoryAsync(int id, CategoryDto dto);

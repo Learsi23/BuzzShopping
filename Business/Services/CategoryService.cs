@@ -1,8 +1,7 @@
-﻿
-
-using Business.DTOs;
+﻿using Business.DTOs;
 using Business.Entities;
 using Business.Interfaces;
+using Business.Mappers;
 using BuzzShopping.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +9,13 @@ namespace Business.Services
 {
     public class CategoryService(AppDbContext context) : ICategoryService
     {
-
-
         private readonly AppDbContext _context = context;
 
+        public async Task<List<CategoryDto>> GetCategoriesAsync()
+        {
+            var categories = await _context.Categories.ToListAsync();
+            return categories.Select(CategoryMapper.ToDto).ToList();
+        }
 
         public Task CreateCategoryAsync(CategoryDto dto)
         {
@@ -23,11 +25,6 @@ namespace Business.Services
         public Task DeleteCategoryAsync(int id)
         {
             throw new NotImplementedException();
-        }
-
-        public async Task<List<CategoryEntity>> GetCategoriesAsync()
-        {
-            return await _context.Categories.ToListAsync();
         }
 
         public Task<CategoryDto> GetCategoryByIdAsync(int id)
