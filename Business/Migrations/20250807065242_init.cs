@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BuzzShopping.Migrations
+namespace Business.Migrations
 {
     /// <inheritdoc />
     public partial class init : Migration
